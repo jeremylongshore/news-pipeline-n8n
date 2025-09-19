@@ -1,0 +1,48 @@
+# N8N Workflow specific
+*.log
+*.tmp
+temp/
+.env
+.env.local
+.env.production
+
+# API Keys and Credentials
+config/credentials.json
+api-keys.txt
+secrets/
+
+# Node modules (if any local tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*_backup.json
+
+# Test files
+test-data/
+mock-data/
+sample-responses/
+
+# Documentation build
+docs/_build/
+site/

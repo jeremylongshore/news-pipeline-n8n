@@ -1,0 +1,687 @@
+{
+  "name": "Daily News Topic Tracker",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -6140,
+        240
+      ],
+      "id": "aab59e11-34fd-4cf1-95d5-4522051ffe63",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app42MWoBdW4bj8Ba",
+          "mode": "list",
+          "cachedResultName": "Brents World",
+          "cachedResultUrl": "https://airtable.com/app42MWoBdW4bj8Ba"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0UGDeOm5zulwqA",
+          "mode": "list",
+          "cachedResultName": "Topics to Monitor",
+          "cachedResultUrl": "https://airtable.com/app42MWoBdW4bj8Ba/tbl0UGDeOm5zulwqA"
+        },
+        "returnAll": "={{ true }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -5480,
+        -480
+      ],
+      "id": "e0b43ebb-0113-4cd0-80a7-e793d7da894a",
+      "name": "Airtable1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "xkPz2bkNdniT6QGt",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4a949abb8b1d470396b36b5e995e782b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        920
+      ],
+      "id": "77cf4eaf-4d2c-474b-aaa4-b4b40f38597a",
+      "name": "WSJ_past_6_months_api"
+    },
+    {
+      "parameters": {
+        "url": "https://news.google.com/rss/search?q=from:reuters.com&hl=en-US&gl=US&ceid=US:en",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        -80
+      ],
+      "id": "31436e94-4645-4132-a205-4ad16656c6a8",
+      "name": "Google_News_RSS"
+    },
+    {
+      "parameters": {
+        "url": "http://rss.cnn.com/rss/edition.rss",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        -280
+      ],
+      "id": "b4e9a126-5f5c-408d-b70f-77c787c9c19f",
+      "name": "CNN_RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://www.nytimes.com/rss",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        120
+      ],
+      "id": "bf2563d9-9c26-4a5e-8b13-f9905760e4d7",
+      "name": "NyTimes_RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://www.theguardian.com/international/rss",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        320
+      ],
+      "id": "d1206d0c-7e8a-41f8-8e2e-777d2440cbf5",
+      "name": "Guardian_RSS"
+    },
+    {
+      "parameters": {
+        "url": "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=4a949abb8b1d470396b36b5e995e782b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        720
+      ],
+      "id": "f2ba6fa2-1bde-4575-b47d-926a144cce82",
+      "name": "NewsApi_Headlines_api"
+    },
+    {
+      "parameters": {
+        "url": "https://api.polygon.io/v3/reference/dividends",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "apiKey",
+              "value": "y2rKGr5UfxmMHuRjkfvXdRWipQ6zJXYp"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -5480,
+        520
+      ],
+      "id": "554f553e-ee1c-491c-87fe-86f776ad5833",
+      "name": "polygon_api"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        -5260,
+        220
+      ],
+      "id": "f25b15d2-b498-4c0f-8ece-894aef5122a7",
+      "name": "Merge Articles"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this news article for relevance to these monitored topics: {{$json.monitored_topics}}\n\nThe article specifically matched these topic keywords: {{$json.matched_topics}}\n\n**Article Details:**\n- Title: {{$json.title}}\n- Description: {{$json.description}} \n- Source: {{$json.source}}\n- URL: {{$json.url}}\n- Published Date: {{$json.published_date}}\n\n**Analysis Requirements:**\n\n1. **Summary**: Write a concise 2-3 sentence summary (max 100 words) focusing on the key development, innovation, or trend described.\n\n2. **Topic Tags**: Assign 2-4 specific topic tags from this list based on the article content:\n   - \"home automation\"\n   - \"smart devices\" \n   - \"IoT sensors\"\n   - \"voice assistants\"\n   - \"smart lighting\"\n   - \"security systems\"\n   - \"energy management\"\n   - \"smart appliances\"\n   - \"connectivity protocols\"\n   - \"AI integration\"\n   - \"mobile apps\"\n   - \"cloud platforms\"\n   - \"privacy concerns\"\n   - \"market trends\"\n   - \"product launches\"\n   - \"partnerships\"\n   - \"funding/investments\"\n   - \"regulations\"\n   - \"consumer adoption\"\n   - \"technical standards\"\n\n3. **Development Status**: Choose the most appropriate status:\n   - \"announced\" - New product/feature/initiative announced\n   - \"in progress\" - Active development or rollout\n   - \"completed\" - Released, launched, or finished\n   - \"delayed\" - Postponed or behind schedule\n   - \"proposed\" - Concept or proposal stage\n   - \"acquired\" - Company/technology acquisition\n   - \"partnership\" - Strategic partnership or collaboration\n   - \"funding\" - Investment or funding round\n   - \"regulatory\" - Government or industry regulation\n   - \"unknown\" - Status unclear from article\n\n4. **Significance Level**: Rate the importance (1-5 scale):\n   - 5: Major breakthrough or industry-changing development\n   - 4: Significant advancement or large company move\n   - 3: Notable development or medium impact\n   - 2: Minor update or small company news\n   - 1: Routine announcement or maintenance update\n\n**Response Format (JSON only):**\n```json\n{\n  \"summary\": \"Your 2-3 sentence summary here\",\n  \"tags\": [\"tag1\", \"tag2\", \"tag3\"],\n  \"status\": \"status_here\",\n  \"significance\": 3,\n  \"key_entities\": [\"company1\", \"product2\", \"technology3\"],\n  \"date_processed\": \"{{new Date().toISOString()}}\"\n}\nRespond with only the JSON object, no additional text.\n\n## OpenRouter Node Settings\n\n**Model Configuration:**\n- **Model**: `gpt-4o-mini` (cost-effective) or `gpt-4o` (higher quality)\n- **Temperature**: `0.2` (for consistent, structured output)\n- **Max Tokens**: `300`\n- **Top P**: `0.9`\n\n**Input/Output:**\n- **Input Type**: Single item processing\n- **Output Parsing**: JSON mode (if available)\n\n## Post-Processing Code Node (Required)\n\nAdd this code node after OpenRouter to clean, validate, and enrich the response with complete metadata:\n\n```javascript\nreturn items.map(item => {\n  const originalArticle = item.json;\n  let aiResponse;\n  \n  try {\n    // Extract AI response from OpenRouter output\n    const responseText = originalArticle.choices?.[0]?.message?.content || \n                        originalArticle.response || \n                        originalArticle.text;\n    \n    // Parse JSON response\n    aiResponse = JSON.parse(responseText);\n    \n    // Validate required fields\n    if (!aiResponse.summary || !aiResponse.tags || !aiResponse.status) {\n      throw new Error('Missing required fields in AI response');\n    }\n    \n  } catch (error) {\n    // Fallback for parsing errors\n    console.log('AI Response parsing failed:', error.message);\n    aiResponse = {\n      summary: \"Processing failed - manual review needed\",\n      tags: [\"processing_error\"],\n      status: \"unknown\",\n      significance: 1,\n      key_entities: [],\n      error: error.message\n    };\n  }\n  \n  // Helper function for week number calculation\n  function getWeekNumber(date) {\n    const firstDayOfYear = new Date(date.getFullYear(), 0, 1);\n    const pastDaysOfYear = (date - firstDayOfYear) / 86400000;\n    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);\n  }\n  \n  // Helper function to extract source domain\n  function extractDomain(url) {\n    try {\n      return new URL(url).hostname.replace('www.', '');\n    } catch {\n      return 'unknown-domain';\n    }\n  }\n  \n  const now = new Date();\n  const publishedDate = originalArticle.published_date ? new Date(originalArticle.published_date) : now;\n  \n  // Combine original article with AI analysis and comprehensive metadata\n  return {\n    json: {\n      // Core Article Data\n      title: originalArticle.title || 'Untitled',\n      description: originalArticle.description || '',\n      url: originalArticle.url || '',\n      source_name: originalArticle.source || 'Unknown Source',\n      source_domain: extractDomain(originalArticle.url || ''),\n      \n      // Dates\n      published_date: originalArticle.published_date || now.toISOString(),\n      date_found: now.toISOString().split('T')[0],\n      published_year: publishedDate.getFullYear(),\n      published_month: publishedDate.getMonth() + 1,\n      published_day: publishedDate.getDate(),\n      \n      // AI-Generated Analysis\n      ai_summary: aiResponse.summary,\n      ai_tags: Array.isArray(aiResponse.tags) ? aiResponse.tags.join(', ') : aiResponse.tags,\n      ai_tags_array: Array.isArray(aiResponse.tags) ? aiResponse.tags : [aiResponse.tags],\n      ai_status: aiResponse.status,\n      ai_significance: aiResponse.significance || 3,\n      ai_entities: Array.isArray(aiResponse.key_entities) ? aiResponse.key_entities.join(', ') : '',\n      ai_entities_array: Array.isArray(aiResponse.key_entities) ? aiResponse.key_entities : [],\n      \n      // Processing Metadata\n      processed_at: now.toISOString(),\n      processed_date: now.toISOString().split('T')[0],\n      processed_year: now.getFullYear(),\n      processed_month: now.getMonth() + 1,\n      processed_week: getWeekNumber(now),\n      workflow_id: $workflow.id,\n      execution_id: $execution.id,\n      processing_version: \"1.0\",\n      ai_model: \"gpt-4o-mini\",\n      \n      // Content Metadata for Search & Filtering\n      title_length: (originalArticle.title || '').length,\n      description_length: (originalArticle.description || '').length,\n      total_content_length: ((originalArticle.title || '') + (originalArticle.description || '')).length,\n      word_count: ((originalArticle.title || '') + ' ' + (originalArticle.description || '')).split(/\\s+/).filter(word => word.length > 0).length,\n      \n      // Quality & Status Flags\n      has_complete_data: !!(originalArticle.title && originalArticle.description && originalArticle.url),\n      ai_processing_success: aiResponse.summary !== \"Processing failed - manual review needed\",\n      requires_manual_review: aiResponse.significance >= 4 || aiResponse.status === \"unknown\" || aiResponse.summary.includes(\"Processing failed\"),\n      is_high_significance: aiResponse.significance >= 4,\n      \n      // Categorization Metadata\n      monitoring_category: \"technology_trends\", // Adjust based on your focus\n      content_type: originalArticle.source?.includes('blog') ? 'blog' : 'news',\n      language: \"en\", // Adjust if processing multiple languages\n      \n      // Search Enhancement Fields\n      searchable_text: `${originalArticle.title || ''} ${originalArticle.description || ''} ${aiResponse.summary} ${Array.isArray(aiResponse.tags) ? aiResponse.tags.join(' ') : aiResponse.tags}`.toLowerCase(),\n      tag_count: Array.isArray(aiResponse.tags) ? aiResponse.tags.length : 1,\n      entity_count: Array.isArray(aiResponse.key_entities) ? aiResponse.key_entities.length : 0,\n      \n      // Time-based Filtering Fields\n      days_since_published: Math.floor((now - publishedDate) / (1000 * 60 * 60 * 24)),\n      is_recent: Math.floor((now - publishedDate) / (1000 * 60 * 60 * 24)) <= 7,\n      quarter: Math.ceil((publishedDate.getMonth() + 1) / 3),\n      \n      // Error Handling\n      processing_errors: aiResponse.error || null,\n      data_quality_score: calculateQualityScore(originalArticle, aiResponse)\n    }\n  };\n  \n  // Helper function to calculate data quality score (1-10)\n  function calculateQualityScore(article, ai) {\n    let score = 0;\n    \n    // Title quality (0-2 points)\n    if (article.title && article.title.length > 10) score += 2;\n    else if (article.title) score += 1;\n    \n    // Description quality (0-3 points)\n    if (article.description && article.description.length > 100) score += 3;\n    else if (article.description && article.description.length > 50) score += 2;\n    else if (article.description) score += 1;\n    \n    // URL validity (0-1 point)\n    if (article.url && article.url.startsWith('http')) score += 1;\n    \n    // Source quality (0-1 point)\n    if (article.source && article.source !== 'Unknown Source') score += 1;\n    \n    // AI processing quality (0-3 points)\n    if (ai.summary && ai.summary.length > 20) score += 1;\n    if (ai.tags && Array.isArray(ai.tags) && ai.tags.length > 0) score += 1;\n    if (ai.status && ai.status !== 'unknown') score += 1;\n    \n    return score;\n  }\n});\nExpected Output Structure\nAfter this step, each article will have this enriched structure:\njson{\n  \"title\": \"Smart Home Device X Launches with New AI Features\",\n  \"description\": \"Company announces breakthrough in voice recognition...\",\n  \"url\": \"https://example.com/article\",\n  \"source\": \"TechCrunch\",\n  \"date_found\": \"2025-06-08\",\n  \"ai_summary\": \"Company X released a new smart home device featuring advanced AI voice recognition that can understand natural language commands and learn user preferences over time.\",\n  \"ai_tags\": [\"smart devices\", \"AI integration\", \"voice assistants\"],\n  \"ai_status\": \"announced\",\n  \"ai_significance\": 4,\n  \"ai_entities\": [\"Company X\", \"Smart Device Y\", \"AI Voice Tech\"],\n  \"processed_at\": \"2025-06-08T15:30:00.000Z\",\n  \"workflow_version\": \"1.0\"\n}\nInclude the original article data in your response:\n{\n  \"title\": \"{{$json.title}}\",\n  \"source\": \"{{$json.source}}\",\n  \"url\": \"{{$json.url}}\",\n  \"author\": \"{{$json.author}}\",\n  \"published_date\": \"{{$json.published_date}}\",\n  \"summary\": \"Your AI summary here\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"status\": \"status_here\",\n  \"significance\": 3,\n  \"key_entities\": [\"entity1\", \"entity2\"]\n}",
+        "batching": {
+          "batchSize": 1,
+          "delayBetweenBatches": 100
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -4380,
+        220
+      ],
+      "id": "307861d9-9d44-498b-9db3-26d7531515f8",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 300,
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -4292,
+        440
+      ],
+      "id": "ecf28464-6ded-4e54-a139-82618316aae3",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AgnQ41KjU7NganoE",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "console.log('=== START OF CODE NODE ===');\nconsole.log('Total items received:', items.length);\n\n// Initialize variables\nlet topicsToMonitor = '';\nlet allArticles = [];\nlet topicsItem = null;\n\n// First, find and extract topics\nfor (let i = 0; i < items.length; i++) {\n  const item = items[i].json;\n  console.log(`\\nChecking item ${i} for topics...`);\n  \n  // Check for Airtable topics structure\n  if (item.fields && item.fields.Topics) {\n    topicsToMonitor = item.fields.Topics;\n    topicsItem = item;\n    console.log('✅ Found topics from Airtable:', topicsToMonitor);\n    break;\n  } else if (item.Topics) {\n    topicsToMonitor = item.Topics;\n    topicsItem = item;\n    console.log('✅ Found topics:', topicsToMonitor);\n    break;\n  } else if (item['Topics to Monitor']) {\n    // Sometimes the field name might be different\n    topicsToMonitor = item['Topics to Monitor'];\n    topicsItem = item;\n    console.log('✅ Found topics (alt field):', topicsToMonitor);\n    break;\n  }\n}\n\n// If no topics found, use defaults\nif (!topicsToMonitor) {\n  topicsToMonitor = 'business, technology, stock, market, deal, investment, CEO, company';\n  console.log('⚠️ No topics found - using broad defaults:', topicsToMonitor);\n}\n\n// Convert topics to array for matching\nconst topicsArray = topicsToMonitor.toLowerCase()\n  .split(/[,;|\\n]/)\n  .map(t => t.trim())\n  .filter(t => t.length > 0);\n\nconsole.log('Topics array:', topicsArray);\n\n// Now process all articles\nlet articlesProcessed = 0;\nlet articlesMatched = 0;\n\nfor (let i = 0; i < items.length; i++) {\n  const item = items[i].json;\n  \n  // Skip if this is the topics item\n  if (item === topicsItem) {\n    console.log(`Skipping item ${i} - it's the topics item`);\n    continue;\n  }\n  \n  // Check if this item contains articles\n  // Handle different RSS feed formats\n  if (typeof item === 'object' && !Array.isArray(item)) {\n    // Check for numbered keys (WSJ format)\n    const keys = Object.keys(item);\n    const numberedKeys = keys.filter(key => !isNaN(parseInt(key)));\n    \n    if (numberedKeys.length > 0) {\n      console.log(`\\nProcessing item ${i} with ${numberedKeys.length} articles (numbered format)`);\n      \n      numberedKeys.forEach(key => {\n        const article = item[key];\n        if (article && typeof article === 'object' && article.title) {\n          articlesProcessed++;\n          processArticle(article, `${i}-${key}`);\n        }\n      });\n    } else if (item.items && Array.isArray(item.items)) {\n      // Standard RSS format\n      console.log(`\\nProcessing item ${i} with ${item.items.length} articles (items array)`);\n      \n      item.items.forEach((article, idx) => {\n        articlesProcessed++;\n        processArticle(article, `${i}-${idx}`);\n      });\n    } else if (item.channel?.item) {\n      // Another RSS format\n      const articles = Array.isArray(item.channel.item) ? item.channel.item : [item.channel.item];\n      console.log(`\\nProcessing item ${i} with ${articles.length} articles (channel.item)`);\n      \n      articles.forEach((article, idx) => {\n        articlesProcessed++;\n        processArticle(article, `${i}-${idx}`);\n      });\n    } else if (item.title && item.description) {\n      // Single article\n      console.log(`\\nProcessing item ${i} as single article`);\n      articlesProcessed++;\n      processArticle(item, i);\n    }\n  }\n}\n\nfunction processArticle(article, index) {\n  // Extract fields\n  const title = (article.title || article.headline || '').toString().trim();\n  const description = (article.description || article.summary || article.content || '').toString().trim();\n  const url = (article.url || article.link || article.guid || '').toString().trim();\n  const source = (article.source?.name || article.source || 'Unknown').toString().trim();\n  \n  if (!title || !description) {\n    console.log(`  - Article ${index}: No title/description, skipping`);\n    return;\n  }\n  \n  // Check topic match\n  const fullText = `${title} ${description}`.toLowerCase();\n  let matchesTopic = false;\n  let matchedTopics = [];\n  \n  topicsArray.forEach(topic => {\n    if (fullText.includes(topic)) {\n      matchesTopic = true;\n      matchedTopics.push(topic);\n    }\n  });\n  \n  if (matchesTopic) {\n    articlesMatched++;\n    console.log(`  ✅ Article ${index}: \"${title.substring(0, 50)}...\" - MATCHED topics: ${matchedTopics.join(', ')}`);\n    \n    allArticles.push({\n      json: {\n        title: title,\n        description: description,\n        url: url,\n        source: source,\n        published_date: article.publishedAt || article.pubDate || new Date().toISOString(),\n        author: article.author || '',\n        monitored_topics: topicsToMonitor,\n        matched_topics: matchedTopics.join(', ')\n      }\n    });\n  } else {\n    console.log(`  ❌ Article ${index}: \"${title.substring(0, 30)}...\" - no match`);\n  }\n}\n\nconsole.log('\\n=== SUMMARY ===');\nconsole.log(`Topics monitored: ${topicsToMonitor}`);\nconsole.log(`Total articles processed: ${articlesProcessed}`);\nconsole.log(`Articles matching topics: ${articlesMatched}`);\n\n// Always return something\nif (allArticles.length === 0) {\n  console.log('\\n⚠️ No articles matched! Returning test article.');\n  return [{\n    json: {\n      title: 'No Matching Articles Found',\n      description: `None of the ${articlesProcessed} articles matched your topics: ${topicsToMonitor}. Consider using broader topics.`,\n      url: 'https://example.com',\n      source: 'System Message',\n      published_date: new Date().toISOString(),\n      author: 'Workflow System',\n      monitored_topics: topicsToMonitor,\n      matched_topics: 'none'\n    }\n  }];\n}\n\nreturn allArticles;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4820,
+        220
+      ],
+      "id": "81743a55-88a3-4ccc-a281-b22f420ce373",
+      "name": "Code",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app42MWoBdW4bj8Ba",
+          "mode": "list",
+          "cachedResultName": "Brents World",
+          "cachedResultUrl": "https://airtable.com/app42MWoBdW4bj8Ba"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblil2WC8McQ9MPmQ",
+          "mode": "list",
+          "cachedResultName": "Articles Table",
+          "cachedResultUrl": "https://airtable.com/app42MWoBdW4bj8Ba/tblil2WC8McQ9MPmQ"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $json.title }} ",
+            "Summary": "={{ $json.summary }}",
+            "Source": "={{ $json.source }}",
+            "Ai Tags": "={{ $json.ai_tags }}",
+            "Processed At": "={{ $json.processed_at }}",
+            "URL": "={{ $json.url }}",
+            "Date Found": "={{ $json.date_found }}",
+            "Author": "={{ $json.author }}",
+            "Publication Date": "={{ $json.published_date }}",
+            "Requires Review": true
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Summary",
+              "displayName": "Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Publication Date",
+              "displayName": "Publication Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ai Tags",
+              "displayName": "Ai Tags",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Processed At",
+              "displayName": "Processed At",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Date Found",
+              "displayName": "Date Found",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Author",
+              "displayName": "Author",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Has Complete Data",
+              "displayName": "Has Complete Data",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Requires Review",
+              "displayName": "Requires Review",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ID Number",
+              "displayName": "ID Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -3780,
+        220
+      ],
+      "id": "02d16590-1158-4e3b-bf77-28588dbad1bf",
+      "name": "Airtable2",
+      "notesInFlow": false,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "xkPz2bkNdniT6QGt",
+          "name": "Airtable Personal Access Token account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Process the current item\nconst data = $json;\n\nconsole.log('=== PROCESSING LLM OUTPUT ===');\n\n// Extract AI response\nlet aiResponse;\ntry {\n  // Handle OpenRouter response structure\n  let responseText = '';\n  \n  if (data.choices && data.choices[0]?.message?.content) {\n    responseText = data.choices[0].message.content;\n  } else if (data.text) {\n    responseText = data.text;\n  } else if (data.response) {\n    responseText = data.response;\n  } else {\n    throw new Error('Could not find AI response');\n  }\n  \n  // Clean JSON\n  responseText = responseText.trim();\n  if (responseText.includes('```json')) {\n    responseText = responseText.replace(/```json\\n?/g, '').replace(/\\n?```/g, '');\n  }\n  \n  const jsonMatch = responseText.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    responseText = jsonMatch[0];\n  }\n  \n  aiResponse = JSON.parse(responseText);\n  console.log('✅ Parsed AI response');\n  \n} catch (error) {\n  console.log('❌ Parse error:', error.message);\n  \n  aiResponse = {\n    summary: \"AI processing failed\",\n    tags: [\"error\"],\n    status: \"unknown\",\n    significance: 1,\n    key_entities: []\n  };\n}\n\n// Build output\nconst now = new Date();\n\nreturn {\n  json: {\n    // Article data (passed through)\n    title: data.title || 'Untitled',\n    description: data.description || '',\n    url: data.url || '',\n    source: data.source || 'Unknown',\n    author: data.author || '',\n    \n    // AI results\n    summary: aiResponse.summary || 'No summary',\n    ai_tags: Array.isArray(aiResponse.tags) ? aiResponse.tags.join(', ') : '',\n    ai_status: aiResponse.status || 'unknown',\n    ai_significance: Number(aiResponse.significance) || 3,\n    ai_entities: Array.isArray(aiResponse.key_entities) ? aiResponse.key_entities.join(', ') : '',\n    \n    // Topics\n    monitored_topics: data.monitored_topics || '',\n    matched_topics: data.matched_topics || '',\n    \n    // Dates\n    published_date: data.published_date || now.toISOString(),\n    date_found: now.toISOString().split('T')[0],\n    processed_at: now.toISOString(),\n    \n    // Flags\n    requires_review: aiResponse.significance >= 4 || aiResponse.status === 'unknown'\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -4004,
+        220
+      ],
+      "id": "e34cdd0c-08e0-4b35-b9ba-70b0e147842e",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "content": "READ ME!\n\nNews Topic Tracker runs once daily every morning.  Intervals can be changed by editing inputs in the Schedule Trigger Node.\n\nTopics can be updated in the Daily News Topic Tracker Airtable.  If updated after the scheduled morning daily run one must re run the workflow for updated results pertaining to updated topics.\n\n\n\n",
+        "height": 300,
+        "width": 400,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3600,
+        -120
+      ],
+      "typeVersion": 1,
+      "id": "d1590716-17ad-4200-9702-5903f572eb59",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -5040,
+        220
+      ],
+      "id": "35be6b11-1823-46fc-98f0-99bd551201cb",
+      "name": "Wait",
+      "webhookId": "22dbdb56-526c-4f15-8a19-3e2c80e03161"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "CNN_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Google_News_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NyTimes_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Guardian_RSS",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "polygon_api",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NewsApi_Headlines_api",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WSJ_past_6_months_api",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable1": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardian_RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "WSJ_past_6_months_api": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "NewsApi_Headlines_api": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "CNN_RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Google_News_RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "NyTimes_RSS": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "polygon_api": {
+      "main": [
+        [
+          {
+            "node": "Merge Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Articles": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Airtable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable2": {
+      "main": [
+        []
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1b283549-e84d-4132-bb80-321d8ac12c25",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12f0b111963f9c1d47dd91686370921753fd90a2637cdc21072d52f29ded2849"
+  },
+  "id": "jDZP6lH9HNcouzrM",
+  "tags": []
+}
