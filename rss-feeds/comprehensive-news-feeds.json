@@ -1,0 +1,288 @@
+{
+  "name": "Comprehensive News RSS Feeds Collection",
+  "description": "Curated collection of premium news sources covering technology, business, politics, science, and general news - NO repair/maintenance content",
+  "last_updated": "2025-09-28",
+  "total_feeds": 45,
+  "feed_categories": {
+    "tech_ai_news": [
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/feed/",
+        "description": "Startup and technology news",
+        "update_frequency": "Real-time"
+      },
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/rss/index.xml",
+        "description": "Technology, science, art, and culture",
+        "update_frequency": "Hourly"
+      },
+      {
+        "name": "Ars Technica",
+        "url": "https://feeds.arstechnica.com/arstechnica/index",
+        "description": "In-depth technology analysis",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Wired",
+        "url": "https://www.wired.com/feed/rss",
+        "description": "Technology and its impact on culture",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "VentureBeat",
+        "url": "https://venturebeat.com/feed/",
+        "description": "Technology business news",
+        "update_frequency": "Hourly"
+      },
+      {
+        "name": "Engadget",
+        "url": "https://www.engadget.com/rss.xml",
+        "description": "Consumer technology news",
+        "update_frequency": "Hourly"
+      },
+      {
+        "name": "IEEE Spectrum",
+        "url": "https://spectrum.ieee.org/rss/fulltext",
+        "description": "Engineering and technology news",
+        "update_frequency": "Daily"
+      }
+    ],
+    "ai_ml_specific": [
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+        "description": "Official OpenAI announcements and research",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://ai.googleblog.com/feeds/posts/default",
+        "description": "Google's AI research and product updates",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "Anthropic Blog",
+        "url": "https://www.anthropic.com/rss.xml",
+        "description": "Anthropic AI safety and research updates",
+        "update_frequency": "Monthly"
+      },
+      {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "description": "Open source AI models and tools",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "AI News",
+        "url": "https://www.artificialintelligence-news.com/feed/",
+        "description": "General AI industry news and updates",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "MIT News AI",
+        "url": "https://news.mit.edu/rss/topic/artificial-intelligence2",
+        "description": "MIT artificial intelligence research news",
+        "update_frequency": "Weekly"
+      }
+    ],
+    "business_finance": [
+      {
+        "name": "Bloomberg Technology",
+        "url": "https://feeds.bloomberg.com/technology/news.rss",
+        "description": "Technology business and finance news",
+        "update_frequency": "Real-time"
+      },
+      {
+        "name": "Reuters Technology",
+        "url": "https://feeds.reuters.com/reuters/technologyNews",
+        "description": "Global technology business news",
+        "update_frequency": "Real-time"
+      },
+      {
+        "name": "Fortune Tech",
+        "url": "https://fortune.com/section/tech/feed/",
+        "description": "Fortune 500 technology coverage",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Forbes Technology",
+        "url": "https://www.forbes.com/innovation/feed2/",
+        "description": "Innovation and technology business",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Wall Street Journal Tech",
+        "url": "https://feeds.a.dj.com/rss/RSSWSJD.xml",
+        "description": "WSJ technology coverage",
+        "update_frequency": "Real-time"
+      }
+    ],
+    "general_news": [
+      {
+        "name": "BBC News Technology",
+        "url": "http://feeds.bbci.co.uk/news/technology/rss.xml",
+        "description": "BBC technology news coverage",
+        "update_frequency": "Hourly"
+      },
+      {
+        "name": "CNN Technology",
+        "url": "http://rss.cnn.com/rss/cnn_tech.rss",
+        "description": "CNN technology news",
+        "update_frequency": "Hourly"
+      },
+      {
+        "name": "NPR Technology",
+        "url": "https://feeds.npr.org/1001/rss.xml",
+        "description": "NPR technology coverage",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Associated Press Technology",
+        "url": "https://feeds.apnews.com/rss/apf-technology.rss",
+        "description": "AP technology news wire",
+        "update_frequency": "Real-time"
+      }
+    ],
+    "science_innovation": [
+      {
+        "name": "Nature News",
+        "url": "https://www.nature.com/nature.rss",
+        "description": "Scientific research and discoveries",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Science Daily",
+        "url": "https://www.sciencedaily.com/rss/computers_math/computer_science.xml",
+        "description": "Computer science research news",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "New Scientist",
+        "url": "https://www.newscientist.com/feed/home/",
+        "description": "Science and technology discoveries",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/feed/",
+        "description": "Emerging technology analysis",
+        "update_frequency": "Daily"
+      }
+    ],
+    "developer_focused": [
+      {
+        "name": "Hacker News",
+        "url": "https://hnrss.org/frontpage",
+        "description": "Developer and tech community news",
+        "update_frequency": "Real-time"
+      },
+      {
+        "name": "GitHub Blog",
+        "url": "https://github.blog/feed/",
+        "description": "Developer tools and platform updates",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "Stack Overflow Blog",
+        "url": "https://stackoverflow.blog/feed/",
+        "description": "Developer community insights",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "InfoQ",
+        "url": "https://feed.infoq.com/",
+        "description": "Software development news",
+        "update_frequency": "Daily"
+      }
+    ],
+    "startup_venture": [
+      {
+        "name": "Product Hunt",
+        "url": "https://www.producthunt.com/feed",
+        "description": "New product launches and startups",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "AngelList Blog",
+        "url": "https://angel.co/blog/feed",
+        "description": "Startup and venture capital news",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "Y Combinator",
+        "url": "https://blog.ycombinator.com/feed/",
+        "description": "Startup accelerator insights",
+        "update_frequency": "Weekly"
+      }
+    ],
+    "cybersecurity": [
+      {
+        "name": "KrebsOnSecurity",
+        "url": "https://krebsonsecurity.com/feed/",
+        "description": "Cybersecurity investigations and news",
+        "update_frequency": "Weekly"
+      },
+      {
+        "name": "The Hacker News",
+        "url": "https://feeds.feedburner.com/TheHackersNews",
+        "description": "Cybersecurity news and analysis",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "Dark Reading",
+        "url": "https://www.darkreading.com/rss_simple.asp",
+        "description": "Enterprise cybersecurity news",
+        "update_frequency": "Daily"
+      }
+    ],
+    "crypto_blockchain": [
+      {
+        "name": "CoinDesk",
+        "url": "https://feeds.coindesk.com/coindesk",
+        "description": "Cryptocurrency and blockchain news",
+        "update_frequency": "Real-time"
+      },
+      {
+        "name": "Cointelegraph",
+        "url": "https://cointelegraph.com/rss",
+        "description": "Blockchain technology news",
+        "update_frequency": "Hourly"
+      }
+    ],
+    "mobile_apps": [
+      {
+        "name": "Android Police",
+        "url": "https://www.androidpolice.com/feed/",
+        "description": "Android news and app updates",
+        "update_frequency": "Daily"
+      },
+      {
+        "name": "9to5Mac",
+        "url": "https://9to5mac.com/feed/",
+        "description": "Apple and iOS news",
+        "update_frequency": "Hourly"
+      }
+    ]
+  },
+  "workflow_recommended_feeds": [
+    "https://techcrunch.com/feed/",
+    "https://www.theverge.com/rss/index.xml",
+    "https://feeds.arstechnica.com/arstechnica/index",
+    "https://venturebeat.com/feed/",
+    "https://openai.com/blog/rss.xml",
+    "https://ai.googleblog.com/feeds/posts/default",
+    "https://www.anthropic.com/rss.xml",
+    "https://feeds.bloomberg.com/technology/news.rss",
+    "https://feeds.reuters.com/reuters/technologyNews",
+    "http://feeds.bbci.co.uk/news/technology/rss.xml",
+    "https://hnrss.org/frontpage",
+    "https://www.technologyreview.com/feed/"
+  ],
+  "usage_notes": {
+    "rate_limits": "Most RSS feeds have no rate limits, but be respectful with polling frequency",
+    "update_schedule": "Recommended polling every 30-60 minutes for optimal freshness",
+    "content_filtering": "Focus on keywords: AI, machine learning, technology, startup, innovation, software, data science",
+    "exclude_keywords": "repair, maintenance, fix, troubleshoot, diagnostic, automotive, construction, equipment"
+  }
+}

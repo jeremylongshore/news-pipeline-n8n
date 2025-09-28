@@ -1,0 +1,153 @@
+{
+  "name": "Tech & AI News RSS Feeds",
+  "description": "Curated collection of premium technology and artificial intelligence news sources",
+  "last_updated": "2025-09-28",
+  "feed_categories": {
+    "ai_research": [
+      {
+        "name": "Machine Learning Mastery",
+        "url": "https://machinelearningmastery.com/feed/",
+        "description": "Practical machine learning tutorials and guides"
+      },
+      {
+        "name": "Towards Data Science",
+        "url": "https://towardsdatascience.com/feed",
+        "description": "Medium publication for data science and ML articles"
+      },
+      {
+        "name": "The Gradient",
+        "url": "https://thegradient.pub/rss/",
+        "description": "AI research and technical analysis"
+      },
+      {
+        "name": "Distill",
+        "url": "https://distill.pub/rss.xml",
+        "description": "Clear explanations of machine learning concepts"
+      },
+      {
+        "name": "Papers with Code",
+        "url": "https://paperswithcode.com/rss.xml",
+        "description": "Latest ML papers with implementation code"
+      }
+    ],
+    "ai_industry": [
+      {
+        "name": "VentureBeat AI",
+        "url": "https://venturebeat.com/ai/feed/",
+        "description": "AI business news and industry analysis"
+      },
+      {
+        "name": "MIT News AI",
+        "url": "https://news.mit.edu/rss/topic/artificial-intelligence2",
+        "description": "MIT artificial intelligence research news"
+      },
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+        "description": "Official OpenAI announcements and research"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://ai.googleblog.com/feeds/posts/default",
+        "description": "Google's AI research and product updates"
+      },
+      {
+        "name": "DeepMind Blog",
+        "url": "https://deepmind.com/blog/feed/basic/",
+        "description": "DeepMind research and breakthrough announcements"
+      },
+      {
+        "name": "Anthropic Blog",
+        "url": "https://www.anthropic.com/rss.xml",
+        "description": "Anthropic AI safety and research updates"
+      }
+    ],
+    "ai_development": [
+      {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "description": "Open source AI models and tools"
+      },
+      {
+        "name": "AI News",
+        "url": "https://www.artificialintelligence-news.com/feed/",
+        "description": "General AI industry news and updates"
+      },
+      {
+        "name": "Together AI",
+        "url": "https://www.together.ai/blog/rss.xml",
+        "description": "AI infrastructure and model serving"
+      }
+    ],
+    "tech_general": [
+      {
+        "name": "TechCrunch",
+        "url": "https://techcrunch.com/feed/",
+        "description": "Startup and technology news"
+      },
+      {
+        "name": "Ars Technica",
+        "url": "https://feeds.arstechnica.com/arstechnica/index",
+        "description": "In-depth technology analysis"
+      },
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/rss/index.xml",
+        "description": "Technology, science, art, and culture"
+      },
+      {
+        "name": "Wired",
+        "url": "https://www.wired.com/feed/rss",
+        "description": "Technology and its impact on culture"
+      },
+      {
+        "name": "IEEE Spectrum",
+        "url": "https://spectrum.ieee.org/rss/fulltext",
+        "description": "Engineering and technology news"
+      }
+    ],
+    "data_science": [
+      {
+        "name": "Analytics Vidhya",
+        "url": "https://www.analyticsvidhya.com/feed/",
+        "description": "Data science tutorials and insights"
+      },
+      {
+        "name": "KDnuggets",
+        "url": "https://www.kdnuggets.com/feed",
+        "description": "Data science, machine learning, and analytics"
+      },
+      {
+        "name": "DataCamp Blog",
+        "url": "https://www.datacamp.com/blog/rss.xml",
+        "description": "Data science education and tutorials"
+      }
+    ],
+    "hardware_tech": [
+      {
+        "name": "Tom's Hardware",
+        "url": "https://www.tomshardware.com/feeds/all",
+        "description": "Computer hardware reviews and news"
+      },
+      {
+        "name": "AnandTech",
+        "url": "https://www.anandtech.com/rss/",
+        "description": "Deep hardware analysis and reviews"
+      }
+    ]
+  },
+  "recommended_for_workflow": [
+    "https://venturebeat.com/ai/feed/",
+    "https://techcrunch.com/feed/",
+    "https://www.theverge.com/rss/index.xml",
+    "https://openai.com/blog/rss.xml",
+    "https://ai.googleblog.com/feeds/posts/default",
+    "https://www.anthropic.com/rss.xml",
+    "https://huggingface.co/blog/feed.xml",
+    "https://feeds.arstechnica.com/arstechnica/index",
+    "https://www.artificialintelligence-news.com/feed/",
+    "https://machinelearningmastery.com/feed/",
+    "https://www.wired.com/feed/rss",
+    "https://spectrum.ieee.org/rss/fulltext"
+  ]
+}
