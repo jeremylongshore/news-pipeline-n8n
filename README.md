@@ -5,7 +5,7 @@
 ![File Size](https://img.shields.io/badge/size-35KB-orange?style=flat-square)
 ![Nodes](https://img.shields.io/badge/nodes-15-blue?style=flat-square)
 ![AI Processing](https://img.shields.io/badge/AI-OpenRouter%20GPT--4o--mini-green?style=flat-square)
-![Version](https://img.shields.io/badge/version-1.0.0-green?style=flat-square)
+![Version](https://img.shields.io/badge/version-2.1.1-green?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
 **Enterprise-grade automated news intelligence pipeline with AI-powered topic analysis**
