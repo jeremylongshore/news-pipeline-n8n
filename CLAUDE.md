@@ -10,7 +10,7 @@ N8N workflow automation for **automated daily news monitoring and topic analysis
 
 ### Main Workflow File
 - **`Daily_News_Topic_Tracker.json`** - Production workflow (686 lines, 35KB, 51 nodes)
-- **`Daily_News_Topic_Tracker_for_Brent.txt`** - Alternative workflow configuration
+- **`Daily_News_Topic_Tracker_for_Brent.txt`** - Alternative workflow configuration (legacy)
 
 ### Execution Flow
 1. **Schedule Trigger** → Daily execution at 8:01 AM
@@ -73,7 +73,7 @@ grep -c "\"type\":" Daily_News_Topic_Tracker.json  # Count nodes
 ### Airtable Integration Nodes (2 nodes)
 - **Airtable Topics Fetch** - Retrieves monitoring topics
 - **Airtable Results Storage** - Stores processed articles
-- **Base ID**: `app42MWoBdW4bj8Ba` ("Brents World")
+- **Base ID**: `app42MWoBdW4bj8Ba` ("News Pipeline Base")
 - **Table ID**: `tbl0UGDeOm5zulwqA` ("Topics to Monitor")
 
 ### LangChain AI Processing
@@ -85,7 +85,7 @@ grep -c "\"type\":" Daily_News_Topic_Tracker.json  # Count nodes
 
 ### Airtable Configuration
 1. **Personal Access Token** - Stored as "Airtable Personal Access Token account"
-2. **Base Access** - "Brents World" base with "Topics to Monitor" table
+2. **Base Access** - "News Pipeline Base" with "Topics to Monitor" table
 3. **Topic Format** - Comma-separated keywords per row
 
 ### News API Keys
