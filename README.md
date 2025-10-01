@@ -3,10 +3,10 @@
 This repo holds **global defaults** for all repos in the org.
 
 ## Templates
-- Audit 🔎
-- Chore/Fix 🛠️
-- Error 🚑
-- Release 🚀
+- Audit
+- Chore/Fix
+- Error
+- Release
 
 ## Quickstart
 1. Open "New Issue" → pick a template

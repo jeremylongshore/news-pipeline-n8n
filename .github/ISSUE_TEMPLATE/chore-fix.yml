@@ -1,4 +1,4 @@
-name: 🛠️ Chore/Fix
+name: Chore/Fix
 description: Small, focused fixes from audit or backlog
 labels: ["chore","fix"]
 body:

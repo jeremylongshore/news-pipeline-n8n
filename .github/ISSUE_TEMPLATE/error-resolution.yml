@@ -1,4 +1,4 @@
-name: 🚑 Error Resolution
+name: Error Resolution
 description: Triage and fix build/dependency/secret failures
 labels: ["bug","triage"]
 body:

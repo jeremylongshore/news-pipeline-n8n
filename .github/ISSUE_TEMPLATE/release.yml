@@ -1,4 +1,4 @@
-name: 🚀 Release
+name: Release
 description: Cut a clean versioned release
 labels: ["release"]
 body:

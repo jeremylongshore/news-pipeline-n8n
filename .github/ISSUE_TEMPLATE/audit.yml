@@ -1,4 +1,4 @@
-name: 🔎 Audit — Repo Health
+name: Audit — Repo Health
 description: Quick repo health check (structure, secrets, docs, CI)
 labels: ["audit"]
 body:
