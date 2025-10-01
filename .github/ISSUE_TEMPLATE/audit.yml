@@ -1,0 +1,24 @@
+name: 🔎 Audit — Repo Health
+description: Quick repo health check (structure, secrets, docs, CI)
+labels: ["audit"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Scope: CI, docs, CODEOWNERS, branch protection, env hygiene.
+        Pro-tip: treat audits like oil changes—cheap now, costly later if skipped.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: Branch protection enabled
+        - label: CODEOWNERS present
+        - label: Secrets only via env/secret store
+        - label: CI runs on PRs
+        - label: README concise; details in /docs
+  - type: textarea
+    id: notes
+    attributes:
+      label: Findings
+      description: Bullet points. Keep it short.

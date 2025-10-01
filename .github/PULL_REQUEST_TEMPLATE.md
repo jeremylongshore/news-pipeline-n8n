@@ -5,6 +5,8 @@
 -
 
 ## Checklist
-- [ ] No secrets
+- [ ] No secrets in code or logs
 - [ ] Docs updated if behavior changed
-- [ ] Linked to issue
+- [ ] Linked Issue included
+
+> Pro-tip: small PRs merge faster than clever PRs.
