@@ -1,0 +1,53 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Semver tag vX.Y.Z"
+        required: true
+  push:
+    tags: ["v*.*.*"]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p dist
+          if [ -d workflows ]; then zip -r dist/workflow-spec.zip workflows; fi
+          echo "# Release" > release-summary.md
+          echo "- Workflows packaged" >> release-summary.md
+
+      - name: Update CHANGELOG
+        env:
+          GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME || 'automation' }}
+          GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL || 'automation@example.com' }}
+        run: |
+          VERSION="${{ github.event.inputs.version || github.ref_name }}"
+          DATE=$(date +'%Y-%m-%d')
+          [ -f CHANGELOG.md ] || cat > CHANGELOG.md <<'MD'
+# Changelog
+All notable changes are tracked here. Semantic Versioning is used.
+## [Unreleased]
+MD
+          awk '1' CHANGELOG.md > CHANGELOG.tmp
+          printf "\n## [%s] - %s\n### Changed\n- Release %s\n" "$VERSION" "$DATE" "$VERSION" >> CHANGELOG.tmp
+          mv CHANGELOG.tmp CHANGELOG.md
+          git config user.name "${GIT_AUTHOR_NAME}"
+          git config user.email "${GIT_AUTHOR_EMAIL}"
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): update for $VERSION" || true
+          cp CHANGELOG.md docs/releases.md || true
+
+      - name: Push changelog
+        run: |
+          git push || true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release-summary.md
+          files: |
+            dist/workflow-spec.zip

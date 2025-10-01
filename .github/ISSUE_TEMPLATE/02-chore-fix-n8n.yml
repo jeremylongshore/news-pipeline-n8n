@@ -1,0 +1,17 @@
+name: Chore or Fix — n8n Workflows
+description: Resolve audit findings with atomic PRs
+labels: ["chore","fix","n8n"]
+body:
+  - type: markdown
+    attributes:
+      value: "Branch naming: chore/<short-title>"
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Tasks
+      options:
+        - label: Infra fixes CI, CODEOWNERS, branch protection
+        - label: Security fixes move inline secrets to env and add .env.example
+        - label: Docs keep README minimal and move details to /docs
+        - label: Deterministic workflow JSON formatting
+        - label: PR links issue and includes proof headless n8n import OK or FAIL

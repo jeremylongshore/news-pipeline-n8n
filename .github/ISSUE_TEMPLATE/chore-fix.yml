@@ -1,0 +1,23 @@
+name: Chore/Fix
+description: Small, focused fixes from audit or backlog
+labels: ["chore","fix"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Branching: `chore/<short-title>`
+        Pro-tip: one branch = one job. Review time drops.
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Scope
+      options:
+        - label: Infra/CI tweak
+        - label: Docs update (keep README minimal)
+        - label: Secrets moved to env
+        - label: Code formatting or lint
+  - type: textarea
+    id: proof
+    attributes:
+      label: Proof
+      description: How you tested. One or two lines.

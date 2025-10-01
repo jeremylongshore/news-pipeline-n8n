@@ -1,0 +1,22 @@
+name: Error Resolution
+description: Triage and fix build/dependency/secret failures
+labels: ["bug","triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pro-tip: fix cause, then add a guard so it can't recur.
+  - type: checkboxes
+    id: fixlist
+    attributes:
+      label: Fix checklist
+      options:
+        - label: Update toolchain/dependencies
+        - label: CI green
+        - label: Secrets rotated; .env.example updated
+        - label: Add guard test/check
+  - type: textarea
+    id: root
+    attributes:
+      label: Root cause
+      description: Two sentences max.

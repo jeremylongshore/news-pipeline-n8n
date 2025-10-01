@@ -1,0 +1,27 @@
+name: ci-validate-workflows
+on:
+  pull_request:
+    paths:
+      - "workflows/**/*.json"
+      - ".github/workflows/**"
+      - ".env.example"
+  push:
+    branches: ["main"]
+    paths: ["workflows/**/*.json"]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint JSON
+        run: |
+          if [ -d workflows ]; then
+            find workflows -name '*.json' -print0 | xargs -0 -I{} jq -e . {} >/dev/null
+          fi
+      - name: Basic shape check
+        run: |
+          if [ -d workflows ]; then
+            for f in $(find workflows -name '*.json'); do
+              jq -e '.nodes and .connections' "$f" >/dev/null || { echo "Bad workflow: $f"; exit 1; }
+            done
+          fi

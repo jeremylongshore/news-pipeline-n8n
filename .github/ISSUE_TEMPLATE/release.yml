@@ -1,0 +1,25 @@
+name: Release
+description: Cut a clean versioned release
+labels: ["release"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version (semver, e.g., v1.3.0)
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Verify
+      options:
+        - label: All tests pass
+        - label: Changelog updated
+        - label: Docs updated (only what users need)
+  - type: textarea
+    id: notes
+    attributes:
+      label: Release notes
+      description: What's new / changed / fixed. Keep it brief.
+  - type: markdown
+    attributes:
+      value: |
+        Pro-tip: tag it, don't drag it. Let CI publish artifacts.
