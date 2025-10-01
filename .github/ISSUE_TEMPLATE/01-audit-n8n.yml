@@ -1,0 +1,22 @@
+name: Audit — n8n Workflows
+description: Audit repo for structure, security, docs, CI readiness
+labels: ["audit","n8n"]
+body:
+  - type: markdown
+    attributes:
+      value: "**Scope:** /workflows/*.json, /packages/*, env handling, CI configs"
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: Tasks
+      options:
+        - label: Validate workflows against n8n schema. Flag cycles and broken credentials
+        - label: Check CODEOWNERS, branch protection, secret scanning
+        - label: Classify issues audit:{infra|security|docs|code} with severity
+        - label: Open one Issue per finding with repro and fix steps
+        - label: Create tracking issue with severity counts
+  - type: textarea
+    id: secrets
+    attributes:
+      label: Secrets and Config
+      description: Add .env.example placeholders N8N_ENCRYPTION_KEY, N8N_HOST, N8N_PORT, provider keys

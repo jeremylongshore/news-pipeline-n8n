@@ -1,0 +1,20 @@
+name: Release — n8n Workflows
+description: Cut a semver release with verification
+labels: ["release","n8n"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version vX.Y.Z
+  - type: checkboxes
+    id: verify
+    attributes:
+      label: Verify
+      options:
+        - label: All workflows load in headless n8n
+        - label: .env.example matches required keys
+        - label: Smoke and basic chaos checks pass
+  - type: textarea
+    id: notes
+    attributes:
+      label: Release notes
